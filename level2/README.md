@@ -1,7 +1,7 @@
 As seen in the disassembled code, the program uses the gets() function to take user input :
 
 ```
-gdb ./level02
+gdb ./level2
 gdb disass p
 ```
 
