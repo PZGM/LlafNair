@@ -2,7 +2,7 @@ As seen in the disassembled code, the program uses the gets() function to take u
 
 ```
 gdb ./level2
-gdb disass p
+disass p
 ```
 
 but this time we also see that check ensures that the return address is not overwritten with an address on the stack:
