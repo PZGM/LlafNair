@@ -1,16 +1,20 @@
 We debug the file with `gdb`.
 
-$ gdb level0
+```
+$ gdb ./level0
+```
 
 Set a breakpoint at main and run the program:
 
+```
 (gdb) break main
 (gdb) run
+```
 
 Step through the instructions with `nexti`.
-
+```
 (gdb) nexti
-
+```
 After stepping through a some instructions, we see that the program calls atoi function and crash with a Segmentation fault juat after calling `atoi`.
 
 We restarted the program with an argument and found that it compares the return value from `atoi` to `0x1a7` (423). After this comparison, the program executes a new shell using the `execv` function:
