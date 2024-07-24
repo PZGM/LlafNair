@@ -7,9 +7,8 @@ The program calls four C functions (`fgets`, `printf`, `fwrite`, `system`) and c
 Since the program uses `fgets` to read from stdin, it is protected from buffer overflow. However, it passes the returned value to the printf function.
 
 According to the manual page of printf, the bugs section states:
-```
-Code such as printf(foo); often indicates a bug, since foo may contain a % character. If foo comes from untrusted user input, it may contain %n, causing the printf() call to write to memory and creating a security hole.
-```
+>Code such as printf(foo); often indicates a bug, since foo may contain a % character. If foo comes from untrusted user input, it may contain %n, causing the printf() call to write to memory and creating a security hole.
+
 We will exploit the program using a "Format String Vulnerability Exploitation" approach. For more information, refer to:
 - https://codearcana.com/posts/2013/05/02/introduction-to-format-string-exploits.html
 
