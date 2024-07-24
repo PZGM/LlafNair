@@ -21,7 +21,7 @@ libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xb7e4e000)
 ```
 Next, we find the address of the ret instruction:
 ```
-=> 0x804853e <p+106>:	ret
+0x804853e <p+106>:	ret
 ```
 We export the shell we want to use:
 ```
