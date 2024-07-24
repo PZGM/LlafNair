@@ -1,13 +1,12 @@
 As seen in the disassembled code, the program uses the gets() function to take user input :
 
 ```
-gdb ./level02
-gdb disass p
+gdb ./level2
+disass p
 ```
 
 but this time we also see that check ensures that the return address is not overwritten with an address on the stack:
 
-To check for a buffer overflow, we input a large string exceeding 100 characters:
 ```
 0x80484fb <p+39>:	and    eax,0xb0000000
 0x8048500 <p+44>:	cmp    eax,0xb0000000
