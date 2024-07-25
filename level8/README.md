@@ -1,6 +1,6 @@
 We started the program and observed that it reads from `stdin` and prints `(nil), (nil)`:
 ```
-$ ./level8
+./level8
 (nil), (nil)
 ```
 By disassembling the `main` function, we discovered some interesting strings:
