@@ -26,7 +26,9 @@ We restarted the program with an argument and found that it compares the return 
 ```
 We ran the program with `423` as the argument:
 
+```
 ./level0 423
+```
 
 This successfully dropped us into a shell as the level1 user, where we retrieved the flag:
 
