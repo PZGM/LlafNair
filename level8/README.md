@@ -43,7 +43,7 @@ gdb> disass main
 
 A cmp instruction compares a value with `0x1e` (31 in decimal).
 
-We deduct that making the difference between the addresses auth and service equal to `0x20` (32 in decimal) may exploit the program.
+We deduct that making the difference between the addresses auth and service superior or equal to `0x20` (32 in decimal) may exploit the program.
 ```
 ./level8
 (nil), (nil)
