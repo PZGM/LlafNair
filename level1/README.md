@@ -16,9 +16,7 @@ End of assembler dump.
 ```
 
 By examining the man page for the gets() function, it can see that this function is deprecated and poses some significant security vulnerability:
-```
-Never use gets(). Because it is impossible to tell without knowing the data in advance how many characters gets() will read, and because gets() will continue to store characters past the end of the buffer, it is extremely dangerous to use.
-```
+> Never use gets(). Because it is impossible to tell without knowing the data in advance how many characters gets() will read, and because gets() will continue to store characters past the end of the buffer, it is extremely dangerous to use.
 
 We try to do a buffer overflow by inputting a string exceeding 100 characters:
 
