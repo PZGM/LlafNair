@@ -10,7 +10,7 @@ Upon trying with two arguments, we received a different response:
 ```
 We disassembled the program and found a global variable `c` and an unused function `m()`. The `m()` function prints the content of the variable `c`.
 
-The `main()` function allocates two string pointers and uses `strcpy` to copy the content from `argv[1]` to `str1` and `argv[2]` to `str2`. Additionally, the program calls fopen to read a file from the path `/home/user/level8/.pass` and stores it in the global variable `c` using `fgets`. The program then calls `puts` to print the string `~~`.
+The `main()` function allocates two string pointers and uses `strcpy` to copy the content from `argv[1]` to `str1` and `argv[2]` to `str2`. Additionally, the program calls `fopen` to read a file from the path `/home/user/level8/.pass` and stores it in the global variable `c` using `fgets`. The program then calls `puts` to print the string `~~`.
 
 We aim to exploit the program by redirecting the execution flow from the `puts` function to the `m()` function, which will print the contents of the global variable `c`.
 
