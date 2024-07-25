@@ -39,8 +39,8 @@ Breakpoint 1, 0x0804867c in main ()
 (gdb) x $eax
 0x804a00c:      0x41414141
 ```
-`
-The value of `[esp+0x10] will be replaced with `0x804a00c`.
+
+The value of `[esp+0x10]` will be replaced with `0x804a00c`.
 Because we need to dereference again, this address will points to the beginning of our shellcode : `0x804a00x + 4 = 0x804a010`.
 
 Our payload structure is:
